@@ -8,6 +8,7 @@ phases:
       - aws --version
       - $(aws ecr get-login --no-include-email --region us-east-1)
       - REPOSITORY_URI=529625914815.dkr.ecr.us-east-1.amazonaws.com/dockerpush
+      - echo $DATABASE_NAME
       
   build:
     commands:
@@ -21,4 +22,3 @@ phases:
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
       - echo Writing image definitions file...
-      - aws ecs update-service --cluster samplenodecluster --service samplenode-service --force-new-deployment
