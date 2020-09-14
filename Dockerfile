@@ -1,6 +1,9 @@
 FROM node:12
 ARG DBNAME
 ENV DBNAME=$DBNAME
+
+ARG DBENV
+ENV DBENV=$DBENV
 # Create app directory
 WORKDIR /usr/src/app
 
@@ -20,5 +23,6 @@ COPY . .
 EXPOSE 8080
 #RUN echo $DBNAME
 RUN echo $DBNAME
+RUN echo $DBENV
 RUN chmod +x /usr/src/app/execute.sh
 ENTRYPOINT ["/usr/src/app/execute.sh"]
