@@ -9,13 +9,14 @@ phases:
       - $(aws ecr get-login --no-include-email --region us-east-1)
       - REPOSITORY_URI=529625914815.dkr.ecr.us-east-1.amazonaws.com/dockerpush
       - echo $DATABASE_NAME
+      - echo $DATABASE_ENV
       
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:v2 .
-      - docker build -t $REPOSITORY_URI:v2 -f Dockerfile --build-arg DBNAME=$DATABASE_NAME .
+      - docker build -t $REPOSITORY_URI:v2 -f Dockerfile --build-arg DBNAME=$DATABASE_NAME --build-arg DBENV=$DATABASE_ENV .
       - docker tag $REPOSITORY_URI:v2 $REPOSITORY_URI:v2
   post_build:
     commands:
