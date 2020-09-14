@@ -1,5 +1,6 @@
 FROM node:12
-
+ARG DBNAME
+ENV DBNAME=$DBNAME
 # Create app directory
 WORKDIR /usr/src/app
 
@@ -17,4 +18,7 @@ COPY . .
 
 
 EXPOSE 8080
-CMD ["node","server.js"]
+#RUN echo $DBNAME
+RUN echo $DBNAME
+RUN chmod +x /usr/src/app/execute.sh
+ENTRYPOINT ["/usr/src/app/execute.sh"]
