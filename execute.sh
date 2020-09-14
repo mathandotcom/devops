@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "Running Inside Script"
 echo "DBNAME" $DBNAME
-DATABASE=$DBNAME node server.js 
+echo "DBENV" $DBENV
+DATABASE=$DBNAME ENV=$DBENV node server.js 
 #echo $DBNAME
